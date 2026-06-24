@@ -1,7 +1,7 @@
 package com.example.PlantsCarModule.controller;
 
 
-import com.example.PlantsCarModule.entity.CarModel;
+import com.example.PlantsCarModule.dto.CarModelDto;
 import com.example.PlantsCarModule.service.CarModelService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -17,23 +17,24 @@ public class CarModelController {
         this.carModelService=carModelService;
     }
     @GetMapping()
-    public List<CarModel> getNotifications() {
+    public List<CarModelDto> getNotifications() {
         return carModelService.getAllCarModel();
     }
     @PostMapping()
-    public  CarModel createNotification(@Valid @RequestBody CarModel carModel){
-        return carModelService.createCarModel(carModel);
+    public  CarModelDto createNotification(@Valid @RequestBody CarModelDto carModelDto){
+        return carModelService.createCarModel(carModelDto);
     }
     @GetMapping("/{id}")
-    public CarModel getNotificationById(@PathVariable int id){
+    public CarModelDto getNotificationById(@PathVariable int id){
         return carModelService.getCarModelById(id);
     }
     @PostMapping("/{id}")
-    public CarModel updateNotification(@PathVariable int id,@Valid @RequestBody CarModel carModel){
-        return  carModelService.updateCarModel(id, carModel);
+    public CarModelDto updateNotification(@PathVariable int id,@Valid @RequestBody CarModelDto carModelDto){
+        return  carModelService.updateCarModel(id, carModelDto);
     }
     @DeleteMapping("/{id}")
-    public void deleteNotification(@PathVariable int id){
+    public String deleteNotification(@PathVariable int id){
          carModelService.deleteCarModel(id);
+         return "CarModel deleted Successfully";
     }
 }
