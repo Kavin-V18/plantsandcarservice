@@ -1,42 +1,53 @@
 package com.example.PlantsCarModule.service;
 
+import com.example.PlantsCarModule.dto.ManufacturingPlantDto;
 import com.example.PlantsCarModule.entity.ManufacturingPlant;
 import com.example.PlantsCarModule.repository.ManufacturingPlantRepository;
+import com.example.PlantsCarModule.util.ManufacturingPlantMapper;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 public class ManufacturingPlantServiceImp implements  ManufacturingPlantService {
     private final ManufacturingPlantRepository manufacturingPlantRepository;
-    public ManufacturingPlantServiceImp(ManufacturingPlantRepository manufacturingPlantRepository) {
-        this.manufacturingPlantRepository = manufacturingPlantRepository;
-    }
-    @Override
-    public ManufacturingPlant createManufacturingPlant(ManufacturingPlant manufacturingPlant) {
-        return manufacturingPlantRepository.save((manufacturingPlant));
-    }
-    @Override
-    public ManufacturingPlant getManufacturingPlantById(int id) {
-        return manufacturingPlantRepository.findById(id).orElseThrow(()->new EntityNotFoundException("No Manufacturingplant found in this id"));
-    }
-    @Override
-    public List<ManufacturingPlant> getAllManufacturingPlant() {
-        return manufacturingPlantRepository.findAll();
-    }
-    @Override
-    public ManufacturingPlant updateManufacturingPlant(int id, ManufacturingPlant manufacturingPlant) {
-        ManufacturingPlant existing=manufacturingPlantRepository.findById(id).orElseThrow(()->new EntityNotFoundException("No Manufacturing Plant Found in this id"));
+    private  final ManufacturingPlantMapper manufacturingPlantMapper;
 
-        existing.setName(manufacturingPlant.getName());
-        existing.setLocation(manufacturingPlant.getLocation());
-        existing.setCapacity_per_day(manufacturingPlant.getCapacity_per_day());
-        existing.set_active(manufacturingPlant.is_active());
-        return null;
+    public ManufacturingPlantServiceImp(ManufacturingPlantRepository manufacturingPlantRepository, ManufacturingPlantMapper manufacturingPlantMapper) {
+        this.manufacturingPlantRepository = manufacturingPlantRepository;
+        this.manufacturingPlantMapper = manufacturingPlantMapper;
+    }
+    @Override
+    public ManufacturingPlantDto createManufacturingPlant(ManufacturingPlantDto manufacturingPlantDto) {
+        ManufacturingPlant entity = manufacturingPlantMapper.toEntity(manufacturingPlantDto); // DTO -> Entity
+        ManufacturingPlant savedEntity = manufacturingPlantRepository.save(entity);
+        return manufacturingPlantMapper.toDto(savedEntity);
+    }
+    @Override
+    public ManufacturingPlantDto getManufacturingPlantById(int id) {
+        ManufacturingPlant existing=manufacturingPlantRepository.findById(id).orElseThrow(()->new EntityNotFoundException("No data present in this id"));
+        ManufacturingPlantDto manufacturingPlantDto= manufacturingPlantMapper.toDto(existing);
+        return  manufacturingPlantDto;
+    }
+    @Override
+    public List<ManufacturingPlantDto> getAllManufacturingPlant() {
+        return manufacturingPlantRepository.findAll().stream().map(manufacturingPlantMapper::toDto).toList();
+    }
+    @Override
+    public ManufacturingPlantDto updateManufacturingPlant(int id, ManufacturingPlantDto manufacturingPlantDto) {
+        ManufacturingPlant existing=manufacturingPlantRepository.findById(id).orElseThrow(()->new EntityNotFoundException("No data present in this id"));
+         existing.setName(manufacturingPlantDto.getName());
+         existing.setCode(manufacturingPlantDto.getCode());
+         existing.setLocation(existing.getLocation());
+         existing.setCapacity_per_day(manufacturingPlantDto.getCapacity_per_day());
+         existing.set_active(manufacturingPlantDto.is_active());
+        ManufacturingPlant updatedEntity=manufacturingPlantRepository.save(existing);
+        return  manufacturingPlantMapper.toDto(updatedEntity);
     }
     @Override
     public void deleteManufacturingPlant(int id) {
-             manufacturingPlantRepository.deleteById(id);
+        ManufacturingPlant existing=manufacturingPlantRepository.findById(id).orElseThrow(()->new EntityNotFoundException());
+        manufacturingPlantRepository.deleteById(id);
     }
 }
+

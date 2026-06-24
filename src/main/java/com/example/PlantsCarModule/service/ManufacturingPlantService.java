@@ -1,13 +1,13 @@
 package com.example.PlantsCarModule.service;
 
 
-import com.example.PlantsCarModule.entity.ManufacturingPlant;
+import com.example.PlantsCarModule.dto.ManufacturingPlantDto;
 import java.util.List;
 
 public interface ManufacturingPlantService {
-    ManufacturingPlant createManufacturingPlant(ManufacturingPlant manufacturingPlant);
-    ManufacturingPlant getManufacturingPlantById(int id);
-    List<ManufacturingPlant> getAllManufacturingPlant();
-    ManufacturingPlant updateManufacturingPlant(int id,ManufacturingPlant manufacturingPlant);
+    ManufacturingPlantDto createManufacturingPlant(ManufacturingPlantDto manufacturingPlantDto);
+    ManufacturingPlantDto getManufacturingPlantById(int id);
+    List<ManufacturingPlantDto> getAllManufacturingPlant();
+    ManufacturingPlantDto updateManufacturingPlant(int id,ManufacturingPlantDto manufacturingPlantDto);
     void deleteManufacturingPlant(int id);
 }
