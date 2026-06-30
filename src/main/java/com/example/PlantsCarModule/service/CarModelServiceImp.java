@@ -5,18 +5,15 @@ import com.example.PlantsCarModule.entity.CarModel;
 import com.example.PlantsCarModule.repository.CarModelRepository;
 import com.example.PlantsCarModule.util.CarModelMapper;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CarModelServiceImp implements CarModelService{
     private  final CarModelRepository carModelRepository;
     private final CarModelMapper carModelMapper;
-
-    public CarModelServiceImp(CarModelRepository carModelRepository, CarModelMapper carModelMapper) {
-        this.carModelRepository = carModelRepository;
-        this.carModelMapper = carModelMapper;
-    }
 
     @Override
     public CarModelDto createCarModel(CarModelDto carModelDto) {
@@ -24,19 +21,16 @@ public class CarModelServiceImp implements CarModelService{
         CarModel savedEntity = carModelRepository.save(entity);
         return carModelMapper.toDto(savedEntity);
     }
-
     @Override
     public CarModelDto getCarModelById(int id) {
         CarModel existing=carModelRepository.findById(id).orElseThrow(()->new EntityNotFoundException("No data present in this id"));
         CarModelDto carModelDtos= carModelMapper.toDto(existing);
         return  carModelDtos;
     }
-
     @Override
     public List<CarModelDto> getAllCarModel() {
         return carModelRepository.findAll().stream().map(carModelMapper::toDto).toList();
     }
-
     @Override
     public CarModelDto updateCarModel(int id, CarModelDto carModelDto) {
         CarModel existing=carModelRepository.findById(id).orElseThrow(()->new EntityNotFoundException());
@@ -50,7 +44,6 @@ public class CarModelServiceImp implements CarModelService{
         CarModel updatedEntity=carModelRepository.save(existing);
         return  carModelMapper.toDto(updatedEntity);
     }
-
     @Override
     public void deleteCarModel(int id) {
         CarModel existing=carModelRepository.findById(id).orElseThrow(()->new EntityNotFoundException());

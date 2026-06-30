@@ -3,18 +3,17 @@ package com.example.PlantsCarModule.controller;
 import com.example.PlantsCarModule.dto.ManufacturingPlantDto;
 import com.example.PlantsCarModule.service.ManufacturingPlantService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/manufacturingplant")
+@RequiredArgsConstructor
 public class ManufacturingPlantController {
 
     private final ManufacturingPlantService manufacturingPlantService;
-    public ManufacturingPlantController(ManufacturingPlantService manufacturingPlantService){
-        this.manufacturingPlantService=manufacturingPlantService;
-    }
     @GetMapping()
     public List<ManufacturingPlantDto> getNotifications() {
         return manufacturingPlantService.getAllManufacturingPlant();

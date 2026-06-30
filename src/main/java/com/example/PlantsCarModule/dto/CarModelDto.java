@@ -8,12 +8,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -24,14 +22,12 @@ public class CarModelDto {
     private FuelType fuelType;
     private Transmission transmission;
     private double base_price;
-//    @JdbcTypeCode(SqlTypes.JSON)
-//    @Column(columnDefinition = "json")
-    private String color_options;
+    private List<String> color_options;
     private LocalDate launch_date;
     @ColumnDefault("true")
     private boolean is_active;
     private LocalDateTime created_at;
-    private String created_by;
+    private Long created_by;
     private LocalDateTime last_modified_at;
-    private String last_modified_by;
+    private Long last_modified_by;
 }
