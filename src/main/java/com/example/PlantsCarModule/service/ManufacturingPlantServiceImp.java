@@ -5,18 +5,16 @@ import com.example.PlantsCarModule.entity.ManufacturingPlant;
 import com.example.PlantsCarModule.repository.ManufacturingPlantRepository;
 import com.example.PlantsCarModule.util.ManufacturingPlantMapper;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ManufacturingPlantServiceImp implements  ManufacturingPlantService {
     private final ManufacturingPlantRepository manufacturingPlantRepository;
     private  final ManufacturingPlantMapper manufacturingPlantMapper;
 
-    public ManufacturingPlantServiceImp(ManufacturingPlantRepository manufacturingPlantRepository, ManufacturingPlantMapper manufacturingPlantMapper) {
-        this.manufacturingPlantRepository = manufacturingPlantRepository;
-        this.manufacturingPlantMapper = manufacturingPlantMapper;
-    }
     @Override
     public ManufacturingPlantDto createManufacturingPlant(ManufacturingPlantDto manufacturingPlantDto) {
         ManufacturingPlant entity = manufacturingPlantMapper.toEntity(manufacturingPlantDto); // DTO -> Entity

@@ -4,18 +4,17 @@ package com.example.PlantsCarModule.controller;
 import com.example.PlantsCarModule.dto.CarModelDto;
 import com.example.PlantsCarModule.service.CarModelService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/carmodel")
+@RequiredArgsConstructor
 public class CarModelController {
 
     private final CarModelService carModelService;
-    public CarModelController(CarModelService carModelService){
-        this.carModelService=carModelService;
-    }
     @GetMapping()
     public List<CarModelDto> getNotifications() {
         return carModelService.getAllCarModel();
