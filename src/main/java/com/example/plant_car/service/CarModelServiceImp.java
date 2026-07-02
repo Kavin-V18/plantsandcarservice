@@ -1,9 +1,9 @@
-package com.example.PlantsCarModule.service;
+package com.example.plant_car.service;
 
-import com.example.PlantsCarModule.dto.CarModelDto;
-import com.example.PlantsCarModule.entity.CarModel;
-import com.example.PlantsCarModule.repository.CarModelRepository;
-import com.example.PlantsCarModule.util.CarModelMapper;
+import com.example.plant_car.dto.CarModelDto;
+import com.example.plant_car.entity.CarModel;
+import com.example.plant_car.repository.CarModelRepository;
+import com.example.plant_car.util.CarModelMapper;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -34,13 +34,13 @@ public class CarModelServiceImp implements CarModelService{
     @Override
     public CarModelDto updateCarModel(int id, CarModelDto carModelDto) {
         CarModel existing=carModelRepository.findById(id).orElseThrow(()->new EntityNotFoundException());
-         existing.setModel_name(carModelDto.getModel_name());
+         existing.setModelName(carModelDto.getModelName());
          existing.setFuelType(carModelDto.getFuelType());
          existing.setTransmission(carModelDto.getTransmission());
-         existing.setBase_price(carModelDto.getBase_price());
-         existing.setColor_options(carModelDto.getColor_options());
-         existing.setLaunch_date(carModelDto.getLaunch_date());
-         existing.set_active(carModelDto.is_active());
+         existing.setBasePrice(carModelDto.getBasePrice());
+         existing.setColorOptions(carModelDto.getColorOptions());
+         existing.setLaunchDate(carModelDto.getLaunchDate());
+         existing.setActive(carModelDto.getActive());
         CarModel updatedEntity=carModelRepository.save(existing);
         return  carModelMapper.toDto(updatedEntity);
     }
@@ -48,5 +48,9 @@ public class CarModelServiceImp implements CarModelService{
     public void deleteCarModel(int id) {
         CarModel existing=carModelRepository.findById(id).orElseThrow(()->new EntityNotFoundException());
         carModelRepository.deleteById(id);
+    }
+    @Override
+    public Boolean existsById(int id) {
+        return carModelRepository.existsById(id);
     }
 }

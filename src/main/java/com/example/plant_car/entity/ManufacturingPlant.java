@@ -1,4 +1,4 @@
-package com.example.PlantsCarModule.entity;
+package com.example.plant_car.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -7,11 +7,12 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="maufacturingplant",schema="public")
 @Data
+@EntityListeners(AuditingEntityListener.class)
 @SoftDelete(strategy = SoftDeleteType.DELETED, columnName = "deleted")
 public class ManufacturingPlant {
     @Id
@@ -23,18 +24,23 @@ public class ManufacturingPlant {
     private String code;
     @Column(nullable = false)
     private String location;
-    @Column(nullable = false)
-    private int capacity_per_day;
+    @Column(nullable = false,name="capacity_per_day")
+    private Integer capacityPerDay;
     @ColumnDefault("true")
-    private boolean is_active;
+    @Column(name="is_active")
+    private Boolean active;
     @CreatedBy
-    private String created_by;
+    @Column(name="created_by")
+    private Long createdBy;
     @CreationTimestamp
-    private LocalDateTime created_at;
+    @Column(name="created_at")
+    private LocalDate createdAt;
     @UpdateTimestamp
-    private LocalDateTime last_modified_at;
+    @Column(name="last_modified_at")
+    private LocalDate lastModifiedAt;
     @LastModifiedBy
-    private String last_modified_by;
-    @Column(name = "deleted", nullable = false)
-    private boolean deleted;
+    @Column(name="last_modified_by")
+    private Long lastModifiedBy;
+    @Column(insertable=false, updatable=false)
+    private Boolean deleted;
 }

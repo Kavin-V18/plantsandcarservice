@@ -1,7 +1,7 @@
-package com.example.PlantsCarModule.util;
+package com.example.plant_car.util;
 
-import com.example.PlantsCarModule.dto.ManufacturingPlantDto;
-import com.example.PlantsCarModule.entity.ManufacturingPlant;
+import com.example.plant_car.dto.ManufacturingPlantDto;
+import com.example.plant_car.entity.ManufacturingPlant;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,12 +14,12 @@ public class ManufacturingPlantMapper {
         return ManufacturingPlantDto.builder().
                 name(manufacturingPlant.getName()).
                 code(manufacturingPlant.getCode()).
-                capacity_per_day(manufacturingPlant.getCapacity_per_day()).
-                is_active(manufacturingPlant.is_active()).
-                created_at(manufacturingPlant.getCreated_at()).
-                created_by(manufacturingPlant.getCreated_by()).
-                last_modified_at(manufacturingPlant.getLast_modified_at()).
-                last_modified_by(manufacturingPlant.getLast_modified_by()).build();
+                capacityPerDay(manufacturingPlant.getCapacityPerDay()).
+                active(manufacturingPlant.getActive()).
+                createdAt(manufacturingPlant.getCreatedAt()).
+                createdBy(manufacturingPlant.getCreatedBy()).
+                lastModifiedAt(manufacturingPlant.getLastModifiedAt()).
+                lastModifiedBy(manufacturingPlant.getLastModifiedBy()).build();
     }
 
     public ManufacturingPlant toEntity(ManufacturingPlantDto dto) {
@@ -28,9 +28,9 @@ public class ManufacturingPlantMapper {
         ManufacturingPlant manufacturingPlant = new ManufacturingPlant();
         manufacturingPlant.setName(dto.getName());
         manufacturingPlant.setCode(dto.getCode());
-        manufacturingPlant.setCapacity_per_day(dto.getCapacity_per_day());
+        manufacturingPlant.setCapacityPerDay(dto.getCapacityPerDay());
         manufacturingPlant.setLocation(dto.getLocation());
-        manufacturingPlant.set_active(dto.is_active());
+        manufacturingPlant.setActive(dto.getActive());
         return manufacturingPlant;
     }
 }

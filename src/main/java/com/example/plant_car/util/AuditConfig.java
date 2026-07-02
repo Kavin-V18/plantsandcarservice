@@ -1,4 +1,4 @@
-package com.example.PlantsCarModule.util;
+package com.example.plant_car.util;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

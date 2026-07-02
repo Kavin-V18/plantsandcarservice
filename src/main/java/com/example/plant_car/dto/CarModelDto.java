@@ -1,7 +1,7 @@
-package com.example.PlantsCarModule.dto;
+package com.example.plant_car.dto;
 
-import com.example.PlantsCarModule.FuelType;
-import com.example.PlantsCarModule.Transmission;
+import com.example.plant_car.FuelType;
+import com.example.plant_car.Transmission;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,16 +18,17 @@ import java.util.List;
 @AllArgsConstructor
 public class CarModelDto {
     @NotNull
-    private String model_name;
+    private String modelName;
     private FuelType fuelType;
     private Transmission transmission;
-    private double base_price;
-    private List<String> color_options;
-    private LocalDate launch_date;
+    private double basePrice;
+    private List<String> colorOptions;
+    private LocalDate launchDate;
     @ColumnDefault("true")
-    private boolean is_active;
-    private LocalDateTime created_at;
-    private Long created_by;
-    private LocalDateTime last_modified_at;
-    private Long last_modified_by;
+    private Boolean active;
+    private LocalDateTime createdAt;
+    private Long createdBy;
+    private LocalDateTime lastModifiedAt;
+    private Long lastModifiedBy;
+    private Boolean deleted;
 }
