@@ -1,6 +1,6 @@
-package com.example.PlantsCarModule.repository;
+package com.example.plant_car.repository;
 
-import com.example.PlantsCarModule.entity.CarModel;
+import com.example.plant_car.entity.CarModel;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

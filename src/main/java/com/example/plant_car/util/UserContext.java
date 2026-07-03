@@ -1,4 +1,4 @@
-package com.example.PlantsCarModule.util;
+package com.example.plant_car.util;
 
 public class UserContext {
     private static final ThreadLocal<Long> USER =

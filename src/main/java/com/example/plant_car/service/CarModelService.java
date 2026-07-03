@@ -1,6 +1,6 @@
-package com.example.PlantsCarModule.service;
+package com.example.plant_car.service;
 
-import com.example.PlantsCarModule.dto.CarModelDto;
+import com.example.plant_car.dto.CarModelDto;
 import java.util.List;
 public interface CarModelService {
         CarModelDto createCarModel(CarModelDto carModelDto);
@@ -8,4 +8,5 @@ public interface CarModelService {
         List<CarModelDto> getAllCarModel();
         CarModelDto updateCarModel(int id,CarModelDto carModelDto);
         void deleteCarModel(int id);
+    Boolean existsById(int id);
 }

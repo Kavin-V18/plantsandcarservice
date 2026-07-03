@@ -1,4 +1,4 @@
-package com.example.PlantsCarModule.util;
+package com.example.plant_car.util;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

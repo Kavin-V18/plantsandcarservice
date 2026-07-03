@@ -1,9 +1,9 @@
-package com.example.PlantsCarModule.service;
+package com.example.plant_car.service;
 
-import com.example.PlantsCarModule.dto.ManufacturingPlantDto;
-import com.example.PlantsCarModule.entity.ManufacturingPlant;
-import com.example.PlantsCarModule.repository.ManufacturingPlantRepository;
-import com.example.PlantsCarModule.util.ManufacturingPlantMapper;
+import com.example.plant_car.dto.ManufacturingPlantDto;
+import com.example.plant_car.entity.ManufacturingPlant;
+import com.example.plant_car.repository.ManufacturingPlantRepository;
+import com.example.plant_car.util.ManufacturingPlantMapper;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -37,8 +37,8 @@ public class ManufacturingPlantServiceImp implements  ManufacturingPlantService 
          existing.setName(manufacturingPlantDto.getName());
          existing.setCode(manufacturingPlantDto.getCode());
          existing.setLocation(existing.getLocation());
-         existing.setCapacity_per_day(manufacturingPlantDto.getCapacity_per_day());
-         existing.set_active(manufacturingPlantDto.is_active());
+         existing.setCapacityPerDay(manufacturingPlantDto.getCapacityPerDay());
+         existing.setActive(manufacturingPlantDto.getActive());
         ManufacturingPlant updatedEntity=manufacturingPlantRepository.save(existing);
         return  manufacturingPlantMapper.toDto(updatedEntity);
     }
@@ -46,6 +46,11 @@ public class ManufacturingPlantServiceImp implements  ManufacturingPlantService 
     public void deleteManufacturingPlant(int id) {
         ManufacturingPlant existing=manufacturingPlantRepository.findById(id).orElseThrow(()->new EntityNotFoundException());
         manufacturingPlantRepository.deleteById(id);
+    }
+
+    @Override
+    public Boolean existsById(int id) {
+        return manufacturingPlantRepository.existsById(id);
     }
 }
 
